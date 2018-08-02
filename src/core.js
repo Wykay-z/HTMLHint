@@ -81,7 +81,7 @@ var HTMLHint = (function (undefined) {
             reset: '',
             yellow: '',
             blue: '',
-            green: '',
+            green: ''
         };
         if(options.colors){
             colors.white = '\033[37m';
@@ -110,8 +110,8 @@ var HTMLHint = (function (undefined) {
                     hintColor = colors.white;
                     break;
             }
-            var leftWindow = 40;
-            var rightWindow = leftWindow + 20;
+            var leftWindow = 10;
+            var rightWindow = leftWindow + 5;
             var evidence = hint.evidence;
             var line = hint.line;
             var col = hint.col;

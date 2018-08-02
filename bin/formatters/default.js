@@ -16,7 +16,7 @@ var defaultFormatter = function(formatter, HTMLHint, options){
         console.log('   '+event.file.white);
         var arrLogs = HTMLHint.format(event.messages, {
             colors: nocolor ? false : true,
-            indent: 6
+            indent: 2
         });
         arrLogs.forEach(function(str){
             console.log(str);
@@ -30,7 +30,7 @@ var defaultFormatter = function(formatter, HTMLHint, options){
         var time = event.time;
         var message;
         if(allHintCount > 0){
-            message = 'Scanned %d files, found %d errors in %d files (%d ms)';
+            message = 'Scanned %d files, found %d tips in %d files (%d ms)';
             console.log(nocolor ? message : message.red, allFileCount, allHintCount, allHintFileCount, time);
         }
         else{
