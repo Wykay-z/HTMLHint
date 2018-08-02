@@ -78,16 +78,38 @@ var HTMLHint = (function (undefined) {
             white: '',
             grey: '',
             red: '',
-            reset: ''
+            reset: '',
+            yellow: '',
+            blue: '',
+            green: '',
         };
         if(options.colors){
             colors.white = '\033[37m';
             colors.grey = '\033[90m';
             colors.red = '\033[31m';
             colors.reset = '\033[39m';
+            colors.yellow = '\033[33m';
+            colors.blue = '\033[36m';
+            colors.green = '\033[32m';
         }
         var indent = options.indent || 0;
+        
         arrMessages.forEach(function(hint){
+            var hintColor;
+            switch(hint.type) {
+                case 'warning': 
+                    hintColor = colors.yellow;
+                    break;
+                case 'info':
+                    hintColor = colors.blue;
+                    break;
+                case 'error':
+                    hintColor = colors.red;
+                    break;
+                default:
+                    hintColor = colors.white;
+                    break;
+            }
             var leftWindow = 40;
             var rightWindow = leftWindow + 20;
             var evidence = hint.evidence;
@@ -117,7 +139,7 @@ var HTMLHint = (function (undefined) {
             if(match !== null){
                 pointCol += match.length;
             }
-            arrLogs.push(colors.white+repeatStr(indent)+repeatStr(String(line).length + 3 + pointCol)+'^ ' + colors.red + hint.message + ' (' + hint.rule.id+')' + colors.reset);
+            arrLogs.push(colors.white+repeatStr(indent)+repeatStr(String(line).length + 3 + pointCol)+'^ ' + hintColor + hint.message + ' (' + hint.rule.id+')' + colors.reset);
         });
         return arrLogs;
     };
